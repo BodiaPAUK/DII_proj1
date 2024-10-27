@@ -20,7 +20,9 @@ fuzzy_operators.draw_lv(model.output_lv)'''
 @app.route('/api/calculate-skill-level/<java_skill>/<english_skill>/<soft_skill>', methods=['GET'])
 def calculate_skill_level(java_skill, english_skill, soft_skill):
     try:
-        int(java_skill) + int(english_skill) + int(soft_skill)
+        java_skill = int(java_skill)
+        english_skill = int(english_skill)
+        soft_skill = int(soft_skill)
     except ValueError:
         return jsonify({"error": "all parameters must be integers"}), 400
 
