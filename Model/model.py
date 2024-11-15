@@ -1,31 +1,31 @@
 input_lvs = [
     {
-        'X': (0, 25, 1),
+        'X': (0, 26, 1),
         'name': 'Java skills',
         'terms': {
             'Beginner': ('trapmf', 0, 0, 15, 18),
             'Intermediate': ('trapmf', 17, 20, 22, 24),
-            'Advanced': ('trapmf', 20, 23, 25, 25),
+            'Advanced': ('trapmf', 20, 23, 25, 26),
         }
     },
 
     {
-        'X': (0, 60, 1),
+        'X': (0, 61, 1),
         'name': 'English level',
         'terms': {
             'Beginner': ('trapmf', 0, 0, 25, 30),
             'Intermediate': ('trapmf', 27, 35, 45, 53),
-            'Advanced': ('trapmf', 51, 55, 60, 60),
+            'Advanced': ('trapmf', 51, 55, 61, 61),
         }
     },
 
     {
-        'X': (0, 50, 1),
+        'X': (0, 51, 1),
         'name': 'Soft skills',
         'terms': {
             'Beginner': ('trapmf', 0, 0, 20, 30),
             'Intermediate': ('trapmf', 25, 33, 40, 45),
-            'Advanced': ('trapmf', 37, 43, 50, 50),
+            'Advanced': ('trapmf', 37, 43, 51, 51),
         }
     },
 ]
