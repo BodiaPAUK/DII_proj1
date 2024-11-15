@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проходження тестів та введення результатів</title>
+</head>
+<body>
+    <h1>Проходження тестів</h1>
+
+    <div class="test-links">
+        <h2>Посилання на тести:</h2>
+        <ul>
+            <li><a href="https://www.w3schools.com/quiztest/quiztest.asp?qtest=JAVA" target="_blank">Тест з Java</a></li>
+            <li><a href="https://test-english.com/level-test/" target="_blank">Тест з англійської</a></li>
+            <li><a href="https://www.thesoftskillsquiz.com/" target="_blank">Тест на софт скіли</a></li>
+        </ul>
+    </div>
+
+    <div class="instructions">
+        <h2>Інструкція для проходження тесту на софт скіли:</h2>
+        <ol>
+            <li>Введіть ваше ім'я</li>
+            <li>Натисніть кнопку "Take a quiz now"</li>
+            <li>Введіть кількість питань (50)</li>
+            <li>Натисніть кнопку "Set"</li>
+            <li>Натисніть кнопку "Set Accept all settings"</li>
+            <li>Натисніть "Go to question 1" для початку тесту</li>
+        </ol>
+    </div>
+
+    <div class="result-form">
+        <h2>Введення результатів</h2>
+        <form id="resultForm">
+            <label for="java_skill">Результат з Java (0-25):</label>
+            <input type="number" id="java_skill" name="java_skill" min="0" max="25" required>
+
+            <label for="english_skill">Результат з англійської (0-60):</label>
+            <input type="number" id="english_skill" name="english_skill" min="0" max="60" required>
+
+            <label for="soft_skill">Результат з софт скілів (0-50):</label>
+            <input type="number" id="soft_skill" name="soft_skill" min="0" max="50" required>
+
+            <button type="button" onclick="submitResults()">Надіслати результати</button>
+        </form>
+    </div>
+
+    <script>
+        async function submitResults() {
+            const javaSkill = document.getElementById('java_skill').value;
+            const englishSkill = document.getElementById('english_skill').value;
+            const softSkill = document.getElementById('soft_skill').value;
+
+            try {
+                const response = await fetch(`/api/calculate-skill-level/${javaSkill}/${englishSkill}/${softSkill}`, {
+                    method: 'GET'
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    alert(`Помилка: ${errorData.error}`);
+                    return;
+                }
+
+                const result = await response.json();
+                alert(`Результат обробки: ${JSON.stringify(result)}`);
+            } catch (error) {
+                console.error("Сталася помилка:", error);
+            }
+        }
+    </script>
+</body>
+</html>

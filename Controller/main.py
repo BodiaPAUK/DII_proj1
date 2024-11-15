@@ -1,7 +1,7 @@
 import Model.model as model
 import Model.inference_mamdani as inference_mamdani
 import Model.fuzzy_operators as fuzzy_operators
-from flask import Flask, jsonify, abort, request
+from flask import Flask, jsonify, abort, request, render_template
 import dataBase.db_access as db_access
 
 app = Flask(__name__)
@@ -42,7 +42,7 @@ def calculate_skill_level(java_skill, english_skill, soft_skill):
 
 # Взаємодія з БД
 # TODO
-@app.route('/api/save-user', methods=['POST'])
+@app.route('/api/register', methods=['POST'])
 def save_user():
     data = request.get_json()
     username = data.get('username')
@@ -63,6 +63,20 @@ def get_user_by_login(login):
         abort(404, description="User not found")
     return jsonify({"user_id": user[0], "username": user[1], "password": user[2]}), 200
 
+@app.route('/api/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    login = data.get('login')
+    password = data.get('password')
+
+    if not login or not password:
+        return jsonify({"error": "Missing fields"}), 400
+
+    user = db_access.get_user_by_login(login)
+    if user[1] and user[2] == password:  # Перевірка пароля користувача
+        return render_template('test.html')
+    else:
+        return jsonify({"error": "Invalid login or password"}), 401
 
 @app.route('/api/save-user-result', methods=['POST'])
 def save_user_result():
@@ -84,8 +98,18 @@ def save_user_result():
 @app.route('/api/get-user-results/<user_id>', methods=['GET'])
 def get_user_results(user_id):
     results = db_access.get_user_results(user_id)
-    return jsonify(results), 200
+    if results:
+        return jsonify(results), 200
+    else:
+        return jsonify({"error": "Results not found"}), 404
 
+@app.route("/test")
+def test():
+    return render_template("test.html")
+
+@app.route("/")
+def index():
+    return render_template("login.html")
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login-font.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Логування</title>
+
+</head>
+<body>
+    <div class="login-form">
+        <h2>Вхід</h2>
+        <label for="login">Логін:</label>
+        <input type="text" id="login" required>
+
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" required>
+
+        <button onclick="login()">Увійти</button>
+        <button onclick="showRegistrationForm()">Зареєструватися</button>
+    </div>
+
+    <!-- Форма реєстрації (початково прихована) -->
+    <div class="register-form" style="display: none;">
+        <h2>Реєстрація</h2>
+        <label for="username">Ім'я користувача:</label>
+        <input type="text" id="username" required>
+
+        <label for="register-login">Логін:</label>
+        <input type="text" id="register-login" required>
+
+        <label for="register-password">Пароль:</label>
+        <input type="password" id="register-password" required>
+
+        <button onclick="register()">Зареєструватися</button>
+        <button onclick="hideRegistrationForm()">Назад</button>
+    </div>
+
+    <script>
+        // Показати форму реєстрації
+        function showRegistrationForm() {
+            document.querySelector('.login-form').style.display = 'none';
+            document.querySelector('.register-form').style.display = 'block';
+        }
+
+        // Сховати форму реєстрації
+        function hideRegistrationForm() {
+            document.querySelector('.register-form').style.display = 'none';
+            document.querySelector('.login-form').style.display = 'block';
+        }
+
+        // Функція для логування
+        async function login() {
+            const login = document.getElementById('login').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ login, password })
+                });
+
+                if (response.ok) {
+                    window.location.href = '/test';
+                } else {
+                    const errorData = await response.json();
+                    alert(`Помилка: ${errorData.error}`);
+                }
+            } catch (error) {
+                console.error("Сталася помилка:", error);
+            }
+        }
+
+        // Функція для реєстрації
+        async function register() {
+            const username = document.getElementById('username').value;
+            const login = document.getElementById('register-login').value;
+            const password = document.getElementById('register-password').value;
+
+            try {
+                const response = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, login, password })
+                });
+
+                if (response.ok) {
+                    alert("Реєстрація пройшла успішно! Ви можете увійти.");
+                    hideRegistrationForm();
+                } else {
+                    const errorData = await response.json();
+                    alert(`Помилка: ${errorData.error}`);
+                }
+            } catch (error) {
+                console.error("Сталася помилка:", error);
+            }
+        }
+    </script>
+</body>
+</html>

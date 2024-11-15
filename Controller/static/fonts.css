@@ -1,0 +1,137 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+    display: grid;
+    place-items: center;  /* Вирівнювання контейнера по центру екрана */
+    height: 100vh;
+    margin: 0;
+}
+
+.test-section {
+    background-color: #ffffff;
+    border: 2px solid #1a73e8;
+    border-radius: 10px;
+    padding: 20px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: grid;
+    gap: 20px;  /* Відстань між елементами */
+}
+
+/* Стиль для заголовка основного контейнера */
+.test-section h2 {
+    color: #e65100;
+    margin: 0;
+    text-align: center;
+}
+
+/* Оформлення для кожного блоку */
+.test-box {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Заголовки всередині блоків */
+.test-box h3 {
+    color: #1a73e8;
+    margin: 0 0 10px;
+    text-align: center;
+}
+
+/* Список посилань на тести */
+.test-links ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+    text-align: center;
+}
+
+.test-links a {
+    color: #1a73e8;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.test-links a:hover {
+    color: #e65100;
+}
+
+/* Інструкції для софт скілів */
+.instructions ol {
+    padding-left: 20px;
+    color: #555;
+    text-align: left;
+}
+
+/* Стиль для форми введення результатів */
+.result-form label {
+    color: #1a73e8;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.result-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border 0.3s;
+}
+
+.result-form input:focus {
+    border-color: #1a73e8;
+    outline: none;
+}
+
+.result-form button {
+    background-color: #e65100;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+.result-form button:hover {
+    background-color: #f57c00;
+}
+
+.results-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.results-section h3 {
+    color: #1a73e8;
+    margin-bottom: 10px;
+}
+
+#resultsList {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+}
+
+#resultsList li {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+

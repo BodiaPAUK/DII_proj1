@@ -1,7 +1,9 @@
 import sqlite3
 from datetime import datetime
+import os.path
 
-DATABASE = 'database.db'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATABASE = (BASE_DIR + '\\database.db')
 
 def get_connection():
     return sqlite3.connect(DATABASE)
